@@ -1,10 +1,10 @@
 const Student = require('../models/student');
 const { verifyToken } = require('../middleware/authMiddleware');
+const bcrypt = require('bcrypt');
 
 // Controller to Create a Student
 const createStudent = async (req, res) => {
     const { first_name, last_name, email, password } = req.body;
-    console.log("AAAAAA");
 
     try {
         // Check if the email already exists
@@ -29,7 +29,8 @@ const createStudent = async (req, res) => {
             student: newStudent,
         });
     } catch (error) {
-        res.status(500).json({ message: 'Server error', error });
+        console.error('Error creating student:', error); // Log the error details
+        res.status(500).json({ message: 'Server error', error: error.message || error });
     }
 };
 
