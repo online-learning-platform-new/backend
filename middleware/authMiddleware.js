@@ -15,9 +15,10 @@ const verifyToken = (role) => {
         try {
             const decoded = jwt.verify(token.split(" ")[1], process.env.JWT_SECRET);
             req.user = decoded;
-
+            console.log("BBBBBB", decoded.role, role);
             // Check role-based access
             if (role && decoded.role !== role) {
+                console.log("AAAAAA", decoded.role, role);
                 return res.status(403).json({ message: 'Access Denied: Insufficient Permissions' });
             }
 
