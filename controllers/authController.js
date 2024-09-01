@@ -65,10 +65,12 @@ const loginStudent = async (req, res) => {
 
         // Generate JWT token
         const token = createToken({ id: student.id, role: 'student' });
+        const student_id = student.id;
 
         res.status(200).json({
             message: 'Login successful',
             token,
+            student_id,
         });
     } catch (error) {
         res.status(500).json({ message: 'Server error', error });

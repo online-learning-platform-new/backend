@@ -6,19 +6,22 @@ const {
     getEnrollmentById,
     updateEnrollment,
     deleteEnrollment,
-    enrollInCourses
+    enrollInCourses,
+    getEnrollmentsByStudentId,
+    getNonEnrollmentsByStudentId
 } = require('../controllers/enrollmentController');
 
 const router = express.Router();
 
 // Admin routes
-router.post('/', verifyToken('admin'), createEnrollment);  // Admin can create enrollments
-router.get('/', verifyToken('admin'), getAllEnrollments);  // Admin can view all enrollments
-router.get('/:id', verifyToken('admin'), getEnrollmentById);  // Admin can view a single enrollment
-router.put('/:id', verifyToken('admin'), updateEnrollment);  // Admin can update an enrollment
-router.delete('/:id', verifyToken('admin'), deleteEnrollment);  // Admin can delete an enrollment
-
+router.post('/', verifyToken('admin'), createEnrollment);  
+router.get('/', verifyToken('admin'), getAllEnrollments);  
+router.get('/:id', verifyToken('admin'), getEnrollmentById);  
+router.put('/:id', verifyToken('admin'), updateEnrollment);  
+router.delete('/:id', verifyToken('admin'), deleteEnrollment); 
+router.get('/student/:student_id', verifyToken('admin'), getEnrollmentsByStudentId);  // Admin can view all enrollments for a student
+router.get('/non-enrollments/:student_id', verifyToken('admin'), getNonEnrollmentsByStudentId);
 // Student route
-router.post('/enroll', verifyToken('student'), enrollInCourses);  // Students can enroll in courses
+router.post('/enroll', verifyToken('student'), enrollInCourses);  
 
 module.exports = router;

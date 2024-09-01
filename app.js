@@ -16,7 +16,7 @@ app.use(cors());  // Enable Cross-Origin Resource Sharing
 app.use(bodyParser.json());  // Parse JSON bodies
 
 // Apply middlewares to routes
-app.use('/api/admin', verifyToken('admin'), adminRoutes); // Protect admin routes
+app.use('/api/admin', adminRoutes); // Protect admin routes
 app.use('/api/students', studentRoutes); // Protect student routes
 
 // Routes
